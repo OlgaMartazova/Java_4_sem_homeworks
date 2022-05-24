@@ -1,6 +1,8 @@
 package ru.itis.school_api.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +15,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -33,6 +37,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @RequiredArgsConstructor
 public class AppConfiguration implements WebMvcConfigurer {
+    @Autowired
     private final Environment environment;
 
     @Bean
@@ -86,5 +91,15 @@ public class AppConfiguration implements WebMvcConfigurer {
     public Validator getHibernateValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         return factory.getValidator();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

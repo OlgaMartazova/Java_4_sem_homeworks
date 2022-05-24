@@ -2,9 +2,8 @@ package ru.itis.school_api.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Getter
@@ -12,12 +11,12 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "assignment")
 public class Task extends AbstractEntity {
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    Student user;
-    String text;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "subject_id")
-    Subject subject;
+    private Subject subject;
+    @OneToMany(mappedBy = "task")
+    private List<Achievement> achievements;
 }

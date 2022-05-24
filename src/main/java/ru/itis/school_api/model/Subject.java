@@ -15,12 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "subjects")
 public class Subject extends AbstractEntity {
     String name;
     String description;
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    Student user;
     @OneToMany(mappedBy = "subject")
     List<Task> assignment;
 }

@@ -1,19 +1,21 @@
 package ru.itis.school_api.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class TaskDto {
-    StudentDto user;
-    @NotNull(message = "STUDENT_ID_EMPTY")
-    private Long userId;
-    @NotBlank(message = "BLANK_COMMENT_TEXT")
-    String text;
-    SubjectDto subject;
+    private Long id;
+    @NotBlank(message = "BLANK_TASK_DESCRIPTION")
+    private String description;
+    private SubjectDto subject;
+    private List<AchievementDto> achievements;
 }

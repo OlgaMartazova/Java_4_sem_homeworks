@@ -14,7 +14,6 @@ public class SubjectDto {
     private String name;
     @NotBlank(message = "BLANK_SUBJECT_DESCRIPTION")
     private String description;
-    private StudentDto user;
-    private Long userId;
     private List<TaskDto> assignment;
+    private List<StudentDto> students;
 }
